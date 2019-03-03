@@ -24,12 +24,12 @@ script:
   # This is terrascan wrapper.
   # https://github.com/tmknom/terrascan
   - docker run --rm -v $(pwd):/work/ --workdir=/work/ -t tmknom/terrascan --location . --test all
+  - ./cred-alert scan -f .
   #- cd examples/some_tests
   #- terraform init
   #- terraform fmt -check=true
   #- terraform validate
   #- cd -
-  - ./cred-alert scan -f .
   - terraform -v
 notifications:
   email: false
