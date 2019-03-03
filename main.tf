@@ -1,5 +1,4 @@
 locals {
-
   default_tags = {
     Name        = "${var.project}-${var.environment}"
     Environment = "${var.environment}"
@@ -13,12 +12,10 @@ locals {
 }
 
 module "queue_without_deadletter" {
-  count      = "${ var.redrive_policy_count == 0 ? 1 : 0}"
-  source = "without_deadletter/"
-
+  count                             = "${ var.redrive_policy_count == 0 ? 1 : 0}"
+  source                            = "without_deadletter/"
   name                              = "${ var.name == "" ? local.default_tags["Name"] : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
   tags                              = "${local.default_tags}"
-
   visibility_timeout_seconds        = "${var.visibility_timeout_seconds}"
   message_retention_seconds         = "${var.message_retention_seconds}"
   max_message_size                  = "${var.max_message_size}"
@@ -28,16 +25,13 @@ module "queue_without_deadletter" {
   content_based_deduplication       = "${var.content_based_deduplication}"
   kms_master_key_id                 = "${var.kms_master_key_id}"
   kms_data_key_reuse_period_seconds = "${var.kms_data_key_reuse_period_seconds}"
-
 }
 
 module "queue_with_deadletter" {
-  count      = "${ var.redrive_policy_count != 0 && var.redrive_policy_arn == "" ? 1 : 0}"
-  source = "with_deadletter/"
-
+  count                             = "${ var.redrive_policy_count != 0 && var.redrive_policy_arn == "" ? 1 : 0}"
+  source                            = "with_deadletter/"
   name                              = "${ var.name == "" ? local.default_tags["Name"] : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
   tags                              = "${local.default_tags}"
-
   visibility_timeout_seconds        = "${var.visibility_timeout_seconds}"
   message_retention_seconds         = "${var.message_retention_seconds}"
   max_message_size                  = "${var.max_message_size}"
@@ -48,16 +42,13 @@ module "queue_with_deadletter" {
   content_based_deduplication       = "${var.content_based_deduplication}"
   kms_master_key_id                 = "${var.kms_master_key_id}"
   kms_data_key_reuse_period_seconds = "${var.kms_data_key_reuse_period_seconds}"
-
 }
 
 module "queue_with_own_deadletter" {
-  count      = "${ var.redrive_policy_count != 0 && var.redrive_policy_arn != "" ? 1 : 0}"
-  source = "with_own_deadletter/"
-
+  count                             = "${ var.redrive_policy_count != 0 && var.redrive_policy_arn != "" ? 1 : 0}"
+  source                            = "with_own_deadletter/"
   name                              = "${ var.name == "" ? local.default_tags["Name"] : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
   tags                              = "${local.default_tags}"
-
   visibility_timeout_seconds        = "${var.visibility_timeout_seconds}"
   message_retention_seconds         = "${var.message_retention_seconds}"
   max_message_size                  = "${var.max_message_size}"
@@ -69,5 +60,4 @@ module "queue_with_own_deadletter" {
   content_based_deduplication       = "${var.content_based_deduplication}"
   kms_master_key_id                 = "${var.kms_master_key_id}"
   kms_data_key_reuse_period_seconds = "${var.kms_data_key_reuse_period_seconds}"
-
 }
