@@ -14,7 +14,7 @@ locals {
 module "queue_without_deadletter" {
   count                             = "${ var.redrive_policy_count == 0 ? 1 : 0}"
   source                            = "without_deadletter/"
-  name                              = "${ var.name == "" ? local.default_tags["Name"] : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
+  name                              = "${ var.name == "" ? {var.project}-${var.environment} : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
   tags                              = "${local.default_tags}"
   visibility_timeout_seconds        = "${var.visibility_timeout_seconds}"
   message_retention_seconds         = "${var.message_retention_seconds}"
@@ -30,7 +30,7 @@ module "queue_without_deadletter" {
 module "queue_with_deadletter" {
   count                             = "${ var.redrive_policy_count != 0 && var.redrive_policy_arn == "" ? 1 : 0}"
   source                            = "with_deadletter/"
-  name                              = "${ var.name == "" ? local.default_tags["Name"] : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
+  name                              = "${ var.name == "" ? {var.project}-${var.environment} : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
   tags                              = "${local.default_tags}"
   visibility_timeout_seconds        = "${var.visibility_timeout_seconds}"
   message_retention_seconds         = "${var.message_retention_seconds}"
@@ -47,7 +47,7 @@ module "queue_with_deadletter" {
 module "queue_with_own_deadletter" {
   count                             = "${ var.redrive_policy_count != 0 && var.redrive_policy_arn != "" ? 1 : 0}"
   source                            = "with_own_deadletter/"
-  name                              = "${ var.name == "" ? local.default_tags["Name"] : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
+  name                              = "${ var.name == "" ? {var.project}-${var.environment} : var.name }${ var.fifo_queue == "true" ? ".fifo" : ""}"
   tags                              = "${local.default_tags}"
   visibility_timeout_seconds        = "${var.visibility_timeout_seconds}"
   message_retention_seconds         = "${var.message_retention_seconds}"
