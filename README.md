@@ -52,10 +52,10 @@ module "sqs3" {
 
 | Name | Description |
 |------|-------------|
-| id | The URL for the created Amazon SQS queue |
-| arn | The ARN of the SQS queue |
-| deadletter_id | The URL for the created Amazon queue_deadletter |
-| deadletter_arn | The ARN of the queue_deadletter |
+| queue_id | The URL for the created Amazon SQS queue |
+| queue_arn | The ARN of the SQS queue |
+| queue_deadletter_id | The URL for the created Amazon queue_deadletter |
+| queue_deadletter_arn | The ARN of the queue_deadletter |
 
 ## Terraform versions
 Terraform v0.11.11

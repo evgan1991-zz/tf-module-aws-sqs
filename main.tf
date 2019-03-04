@@ -5,10 +5,10 @@ locals {
     Project     = "${var.project}"
   }
 
-  id             = "${ var.redrive_policy_count == 0 ? module.queue_without_deadletter.id  : "${var.redrive_policy_arn != "" ? module.queue_with_own_deadletter.id  : module.queue_with_deadletter.id }"}"
-  arn            = "${ var.redrive_policy_count == 0 ? module.queue_without_deadletter.arn : "${var.redrive_policy_arn != "" ? module.queue_with_own_deadletter.arn : module.queue_with_deadletter.arn }"}"
-  deadletter_id  = "${ var.redrive_policy_count == 0 ? "" : module.queue_with_deadletter.queue_deadletter_id  }"
-  deadletter_arn = "${ var.redrive_policy_count == 0 ? "" : module.queue_with_deadletter.queue_deadletter_arn }"
+  id             = "${ var.redrive_policy_count == 0 ? module.queue_without_deadletter.without_deadletter_id  : "${var.redrive_policy_arn != "" ? module.queue_with_own_deadletter.with_own_deadletter_id  : module.queue_with_deadletter.with_deadletter_id }"}"
+  arn            = "${ var.redrive_policy_count == 0 ? module.queue_without_deadletter.without_deadletter_arn : "${var.redrive_policy_arn != "" ? module.queue_with_own_deadletter.with_own_deadletter_arn : module.queue_with_deadletter.with_deadletter_arn }"}"
+  deadletter_id  = "${ var.redrive_policy_count == 0 ? "" : module.queue_with_deadletter.created_deadletter_id  }"
+  deadletter_arn = "${ var.redrive_policy_count == 0 ? "" : module.queue_with_deadletter.created_deadletter_arn }"
 }
 
 module "queue_without_deadletter" {
