@@ -1,9 +1,9 @@
-# Summary
+## Description
 
 Module for creating Simple Queue Service.
 Includes 3 submodules for creating SQS with/without/with_own deadletter (Not realizable otherwise in version 0.11)
 
-## Usage example
+## Usage
 
 ```hcl
 module "sqs1" {
@@ -56,3 +56,15 @@ module "sqs3" {
 | arn | The ARN of the SQS queue |
 | deadletter_id | The URL for the created Amazon queue_deadletter |
 | deadletter_arn | The ARN of the queue_deadletter |
+
+## Terraform versions
+Terraform v0.11.11
+
+## Contributing
+
+
+## License
+Apache
+
+## Authors
+Lean Delivery Team team@lean-delivery.com
